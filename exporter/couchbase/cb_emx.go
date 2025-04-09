@@ -253,8 +253,8 @@ type cbemxClusterUUIDDetails struct {
  */
 func setCBConnectionString() {
 	level.Info(logger).Log("Event", "Setting connection string based on protocol, host and port env variables")
-	cbProtocol := os.Getenv("CB_PROTOCOL")
-	if cbProtocol == "" {
+	cbProtocol := strings.ToUpper(os.Getenv("CB_PROTOCOL"))
+	if cbProtocol != "HTTP" && cbProtocol != "HTTPS" {
 		cbProtocol = "HTTPS"
 	}
 	cbPort := os.Getenv("CB_PORT")
